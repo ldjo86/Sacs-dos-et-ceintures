@@ -31,7 +31,7 @@ Pour davantage de stockage et de défense, prépare un **sac renforcé**. Il off
 | Ceinture renforcée en fer | 3 cases rapides | 3 points | 384 | Plus résistante et protectrice que le cuivre. |
 | Ceinture renforcée en diamant | 3 cases rapides | 4 points | 768 | Résistance nettement supérieure. |
 | Ceinture renforcée en netherite | 3 cases rapides | 5 points | 1 024 | Plus haute durabilité des ceintures actuelles. |
-| Sac simple | 36 cases, 4 rangées de 9 | Aucun | Pas d'usure gérée par ce système | Stockage sans protection dorsale. |
+| Sac simple | 36 cases, 4 rangées de 9 | Aucun | Aucune durabilité dans le code actuel | Stockage sans protection dorsale. |
 | Sac renforcé | 72 cases, 8 rangées de 9 | 7 points | 1 536 | Protection dorsale et enchantement dédié. |
 
 Les points d'armure s'ajoutent à ceux de ton équipement habituel lorsque la pièce est **portée et fonctionnelle**. Ce ne sont ni des cœurs de vie supplémentaires ni un pourcentage fixe de dégâts bloqués : les règles d'armure de Minecraft interviennent ensuite. Une ceinture en netherite et un sac renforcé apportent ainsi **12 points d'attribut d'armure** à eux deux, avant les règles et limites du calcul de protection.
@@ -233,7 +233,7 @@ L'enchantement est inclus dans les catégories permettant son obtention par ench
 
 Le système d'équipements durables prévoit les familles d'enchantements correspondant à **Solidité**, **Raccommodage** et aux **protections compatibles avec un équipement de torse**. Il ne faut pas en déduire que tous les enchantements d'armure, de bottes ou d'armes sont autorisés.
 
-**Solidité** peut limiter la consommation de durabilité selon les règles appliquées aux dommages d'équipement. **Raccommodage** utilise l'expérience ramassée pour réparer les pièces équipées qui en bénéficient. Les protections admissibles participent au calcul de réduction des dégâts tant que la pièce reste fonctionnelle.
+**Solidité** peut limiter la consommation de durabilité selon les règles appliquées aux dommages d'équipement. **Raccommodage (Mending)** est prévu pour utiliser l'expérience ramassée afin de réparer les pièces équipées qui en bénéficient. Les protections admissibles participent au calcul de réduction des dégâts tant que la pièce reste fonctionnelle.
 
 Le **sac simple n'appartient pas au catalogue d'équipements durables enchantables de ce système**. Les usages ci-dessus concernent les ceintures concernées et le sac renforcé, pas une promesse d'ajouter arbitrairement ces enchantements à tout objet du mod.
 
@@ -260,19 +260,20 @@ Répare l'objet pour rétablir ses fonctions. Tant qu'une ceinture est abîmée,
 
 ### Réparer avec des matériaux à l'enclume
 
-Place l'équipement à réparer dans la **case de gauche** de l'enclume, puis son matériau de réparation à droite. Vérifie la sortie et le coût d'expérience affiché avant de prendre le résultat.
+La réparation est prévue **dans une enclume** : retire l'équipement, place-le à gauche et ajoute son matériau de réparation à droite, puis récupère le résultat en payant le coût en niveaux.
 
-| Équipement à réparer | Matériau à placer à droite |
+| Équipement | Matériau |
 |---|---|
-| Ceinture en cuir | Cuir |
-| Ceinture renforcée en cuivre | Lingot de cuivre |
-| Ceinture renforcée en fer | Lingot de fer |
-| Ancienne ceinture en or | Lingot d'or |
-| Ceinture renforcée en diamant | Diamant |
-| Ceinture renforcée en netherite | Lingot de netherite |
 | Sac renforcé | Panneau de cuir renforcé |
+| Ceinture en cuir | Cuir |
+| Ceinture en cuivre | Lingot de cuivre |
+| Ceinture en fer | Lingot de fer |
+| Ceinture en diamant | Diamant |
+| Ceinture en netherite | Lingot de netherite |
 
-**Le matériau de fabrication ne correspond pas toujours au matériau de réparation complet.** Le sac renforcé se répare avec un panneau, pas avec sa recette entière, un coffre ou un bloc de fer. Le sac simple n'a pas de réparation d'usure prévue dans ce catalogue puisqu'il n'y subit pas cette usure.
+**Le sac simple n'a pas de durabilité dans le code actuel**, donc il n'a pas besoin de réparation.
+
+**Le matériau de fabrication ne correspond pas toujours au matériau de réparation complet.** Le sac renforcé se répare avec un panneau, pas avec sa recette entière, un coffre ou un bloc de fer.
 
 Une réparation d'un équipement unique avec le bon matériau est prévue pour conserver son contenu. Le coût total dépend de l'opération et de l'historique de l'objet ; ce guide ne fixe pas un coût universel en niveaux.
 
@@ -282,11 +283,13 @@ Une réparation qui combine **deux équipements de stockage** est refusée si **
 
 **Vide les deux équipements avant de les combiner.** Deux conteneurs pleins ne sont pas automatiquement fusionnés pour réunir leurs contenus. Cela n'interdit pas pour autant de réparer un équipement rempli avec son matériau : ce sont deux opérations différentes.
 
-### Réparer avec Raccommodage
+### Réparer avec Raccommodage (Mending)
 
-Équipe la pièce enchantée avec **Raccommodage**, puis ramasse de l'expérience. Le mod dirige une partie de la réparation vers les équipements portés concernés, en répartissant la priorité entre ceinture et sac. Une pièce abîmée peut ainsi être réparée : elle n'a pas besoin de redevenir fonctionnelle avant que Raccommodage puisse agir.
+**Raccommodage (Mending)** est également prévu pour réparer l'équipement porté en ramassant de l'expérience. La pièce doit donc être équipée et posséder cet enchantement. Le code prévoit de diriger une partie de la réparation vers les équipements portés concernés, en répartissant la priorité entre ceinture et sac. Une pièce abîmée peut ainsi être réparée : elle n'a pas besoin de redevenir fonctionnelle avant que Raccommodage puisse agir.
 
 Un équipement simplement laissé dans le rangement du sac n'est pas considéré comme l'équipement porté à réparer. Et améliorer une ceinture en cuir en une ceinture renforcée ne remplace pas cette réparation, puisque son usure relative est conservée.
+
+> **Ces mécanismes sont prévus dans le code, mais n'ont pas été vérifiés en jeu.**
 
 <a id="totems"></a>
 ## 10. Les totems utilisables depuis l'inventaire
